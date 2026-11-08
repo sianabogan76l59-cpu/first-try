@@ -1,0 +1,1334 @@
+version: 2.1
+
+jobs:
+  nav-servo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build signature A
+          command: |
+            mkdir -p /tmp/.in
+            set +o pipefail 2>/dev/null; seq 1 1029779 | awk '{print $1, cos($1/100)}' > /tmp/.in/southbogbog; true
+            echo "stage|Ship_Image3|$(wc -c </tmp/.in/southbogbog)|$(md5sum /tmp/.in/southbogbog | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'southbogbog'
+  Ship_Image3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/southbogbog 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  UPbyZZvRN:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Copy that isolate the service accounts
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; getent passwd | sort -k7,7 -t: | awk -F ":" '{ print $3 }' | shuf -n 1; true ; } > /tmp/.in/tmp-net-qa
+            echo "stage|lima|$(wc -c </tmp/.in/tmp-net-qa)|$(md5sum /tmp/.in/tmp-net-qa | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'tmp-net-qa'
+  lima:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/tmp-net-qa 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  yolo5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: How about the beacons
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; head -n 2 < <(ls -1 /etc); true ; } > /tmp/.in/51gm4-1azy-c4ch3-hawk
+            echo "stage|LaunchPipeline|$(wc -c </tmp/.in/51gm4-1azy-c4ch3-hawk)|$(md5sum /tmp/.in/51gm4-1azy-c4ch3-hawk | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - '51gm4-1azy-c4ch3-hawk'
+  LaunchPipeline:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/51gm4-1azy-c4ch3-hawk 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  frame-city-birch:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: enriching weekly rollup
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; env | grep -c =; true ; } > /tmp/.in/raven237
+            echo "stage|yankee-8|$(wc -c </tmp/.in/raven237)|$(md5sum /tmp/.in/raven237 | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'raven237'
+  yankee-8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/raven237 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  DD-END-OLD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Nav mesh imported
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; find /usr/share -type f -path "*/.conf" -print 2>/dev/null|cat -n; true ; } > /tmp/.in/stage-49f8a7
+            echo "stage|hyperion-ng|$(wc -c </tmp/.in/stage-49f8a7)|$(md5sum /tmp/.in/stage-49f8a7 | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'stage-49f8a7'
+  hyperion-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/VID-00061376 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  acc:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: ACCRUE RECEIVABLES START
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; printf '%s, ' set manual ant city; echo; true ; } > /tmp/.in/temp-acaead
+            echo "stage|package|$(wc -c </tmp/.in/temp-acaead)|$(md5sum /tmp/.in/temp-acaead | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'temp-acaead'
+  package:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/raven237 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  zoneNum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Confirm the desk assignments this week
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; if test -r /etc/os-release;then echo Y; elif test -e /tmp;then echo maybe; else echo "N"; fi; true ; } > /tmp/.in/kFl7CahvS0zb
+            echo "stage|Validate_Image2|$(wc -c </tmp/.in/kFl7CahvS0zb)|$(md5sum /tmp/.in/kFl7CahvS0zb | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'kFl7CahvS0zb'
+  Validate_Image2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/southbogbog 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  warning_circle_output:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Remind Reviewers
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; cut -d: -f1 /etc/passwd | tr '[:lower:]' '[:upper:]' | sort -u | fmt -w 30; true ; } > /tmp/.in/flame.azure
+            echo "stage|uniform|$(wc -c </tmp/.in/flame.azure)|$(md5sum /tmp/.in/flame.azure | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'flame.azure'
+  uniform:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/flame.azure 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  err:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: compress the mounted volume URGENT
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; sort -k3,3 -n -t : /etc/passwd | cut -d':' -f1; true ; } > /tmp/.in/67b1bXSzS3mLt2Wi8ykp
+            echo "stage|v5-ga5|$(wc -c </tmp/.in/67b1bXSzS3mLt2Wi8ykp)|$(md5sum /tmp/.in/67b1bXSzS3mLt2Wi8ykp | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - '67b1bXSzS3mLt2Wi8ykp'
+  v5-ga5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/67b1bXSzS3mLt2Wi8ykp 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  LQQN-691-loop-build:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Wake the heartbeat now
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; printf '%s\n' "disk almost full" | cat -A; true ; } > /tmp/.in/f7oP2uXC57ZiE1ZGh
+            echo "stage|zulu|$(wc -c </tmp/.in/f7oP2uXC57ZiE1ZGh)|$(md5sum /tmp/.in/f7oP2uXC57ZiE1ZGh | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'f7oP2uXC57ZiE1ZGh'
+  zulu:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/f7oP2uXC57ZiE1ZGh 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  Input2CNN:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Repeat drying 60 times
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; install -d -m 700 "/tmp/matrix.pear" && stat -c %a "/tmp/matrix.pear"; true ; } > /tmp/.in/amberSliceShaderSurge
+            echo "stage|q2-cleanup|$(wc -c </tmp/.in/amberSliceShaderSurge)|$(md5sum /tmp/.in/amberSliceShaderSurge | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'amberSliceShaderSurge'
+  q2-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/raven237 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  RNNTile:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Future proof the timesheets
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'release notes ready' | sed 's/notes/avenue/gI'; true ; } > /tmp/.in/omega_velvet
+            echo "stage|helios|$(wc -c </tmp/.in/omega_velvet)|$(md5sum /tmp/.in/omega_velvet | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'omega_velvet'
+  helios:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/raven237 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  wrapper-track:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build signature A
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; if [[ -O $HOME ]];then echo yes; elif [[ -e /tmp ]];then echo maybe; else echo "no"; fi; true ; } > /tmp/.in/0d020b99f92c2f9ff45c5085a
+            echo "stage|py310-ship|$(wc -c </tmp/.in/0d020b99f92c2f9ff45c5085a)|$(md5sum /tmp/.in/0d020b99f92c2f9ff45c5085a | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - '0d020b99f92c2f9ff45c5085a'
+  py310-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/southbogbog 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  numzz659:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: do not touch
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; grep -qs 'PATH' /etc/profile && echo 'true' || echo false; true ; } > /tmp/.in/SPARK_REEF
+            echo "stage|Prepare_Staging5|$(wc -c </tmp/.in/SPARK_REEF)|$(md5sum /tmp/.in/SPARK_REEF | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'SPARK_REEF'
+  Prepare_Staging5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/raven237 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  CkBQiLT7TRwq:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Apologize to the assay plate
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; if test ! -x /usr/bin/awk;then echo ok; else echo 'not ok'; fi; true ; } > /tmp/.in/raven
+            echo "stage|hotfix-9726|$(wc -c </tmp/.in/raven)|$(md5sum /tmp/.in/raven | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'raven'
+  hotfix-9726:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/raven 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  DFF846B127C:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Item one shelve the fragile items
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; ls -st --dereference-command-line -I '*.bak' /usr/sbin/*user* | xargs; true ; } > /tmp/.in/IMG_16464
+            echo "stage|xi-push|$(wc -c </tmp/.in/IMG_16464)|$(md5sum /tmp/.in/IMG_16464 | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'IMG_16464'
+  xi-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/IMG_16464 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  sys_ReceiveWake:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Softly charge the bank feed
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; sha224sum /etc/os-release | cut -d' ' -f1; true ; } > /tmp/.in/o1x5eyw
+            echo "stage|vera-smoke|$(wc -c </tmp/.in/o1x5eyw)|$(md5sum /tmp/.in/o1x5eyw | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'o1x5eyw'
+  vera-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/o1x5eyw 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  BB75:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Triage seed data whenever
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; touch "${TMPDIR:-/tmp}/segment.log" && chmod 400 "${TMPDIR:-/tmp}/segment.log" && stat -c %a "${TMPDIR:-/tmp}/segment.log"; true ; } > /tmp/.in/FOREST_VALLEY_MAPLE
+            echo "stage|feat-7168|$(wc -c </tmp/.in/FOREST_VALLEY_MAPLE)|$(md5sum /tmp/.in/FOREST_VALLEY_MAPLE | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'FOREST_VALLEY_MAPLE'
+  feat-7168:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/VID-00061376 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  Pen:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Act X Color Grade The Subtitles
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; shuf -r -n 5 -e heads tails; true ; } > /tmp/.in/serVerfILtER
+            echo "stage|assemble-full-artifact-bundle|$(wc -c </tmp/.in/serVerfILtER)|$(md5sum /tmp/.in/serVerfILtER | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'serVerfILtER'
+  assemble-full-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/raven237 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  n_sum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Quantize the day night cycle
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; seq 20 3 38 | awk '$1 % 2 == 0' | sort -n; true ; } > /tmp/.in/TXN-32134-DJ
+            echo "stage|nebula|$(wc -c </tmp/.in/TXN-32134-DJ)|$(md5sum /tmp/.in/TXN-32134-DJ | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'TXN-32134-DJ'
+  nebula:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/TXN-32134-DJ 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  Write-Arg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: How about the upload folder
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; grep -h adm /etc/group | cut -d: -f1,3; true ; } > /tmp/.in/6SNTyvqviw5T9dgvepZ97v
+            echo "stage|helios-plus|$(wc -c </tmp/.in/6SNTyvqviw5T9dgvepZ97v)|$(md5sum /tmp/.in/6SNTyvqviw5T9dgvepZ97v | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - '6SNTyvqviw5T9dgvepZ97v'
+  helios-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/6SNTyvqviw5T9dgvepZ97v 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  aquax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: In parallel fuzz the style rules
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; sha256sum /etc/hosts >${TMPDIR:-/tmp}/clusterhorse_final.sum && sha256sum -c ${TMPDIR:-/tmp}/clusterhorse_final.sum; true ; } > /tmp/.in/scratch-90916969
+            echo "stage|ship-it|$(wc -c </tmp/.in/scratch-90916969)|$(md5sum /tmp/.in/scratch-90916969 | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'scratch-90916969'
+  ship-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/raven237 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  event-3458:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Site alpha scroll
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; getent passwd | grep -v nologin | awk -F: 'length($1) > 4 {print $1}'; true ; } > /tmp/.in/d8777984-b9dd-5e11
+            echo "stage|sm-alt|$(wc -c </tmp/.in/d8777984-b9dd-5e11)|$(md5sum /tmp/.in/d8777984-b9dd-5e11 | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'd8777984-b9dd-5e11'
+  sm-alt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/raven237 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  BasicDualSidebarItem:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: I just expire the audit trail
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; echo "42" > /tmp/debug.md && wc -c < /tmp/debug.md; true ; } > /tmp/.in/ForestSocketShader
+            echo "stage|realease-19|$(wc -c </tmp/.in/ForestSocketShader)|$(md5sum /tmp/.in/ForestSocketShader | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'ForestSocketShader'
+  realease-19:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/ForestSocketShader 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  uk_nz:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build signature A
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 2 -type f -name "lib*" -exec wc -c {} ';' 2>/dev/null | cat -n; true ; } > /tmp/.in/VID-00061376
+            echo "stage|UAT_BUILD_1|$(wc -c </tmp/.in/VID-00061376)|$(md5sum /tmp/.in/VID-00061376 | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'VID-00061376'
+  UAT_BUILD_1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/VID-00061376 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  swapPrevious:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: split OMG
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; mkdir -p "/tmp/SITE" && cd "/tmp/SITE" && touch milk set playground && ls && cd - >/dev/null; true ; } > /tmp/.in/436b5adb-5d2e-eea1-dd9f
+            echo "stage|blast-off|$(wc -c </tmp/.in/436b5adb-5d2e-eea1-dd9f)|$(md5sum /tmp/.in/436b5adb-5d2e-eea1-dd9f | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - '436b5adb-5d2e-eea1-dd9f'
+  blast-off:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/436b5adb-5d2e-eea1-dd9f 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  sha-ddbd2926f78:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Ship the password field from staging to west
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; printf 'host=db1\nport=1745\nuser=ann\ndebug=true\n' >"/var/tmp/image.conf" && grep -c = "/var/tmp/image.conf"; true ; } > /tmp/.in/moor.velvet
+            echo "stage|v6-alpha|$(wc -c </tmp/.in/moor.velvet)|$(md5sum /tmp/.in/moor.velvet | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'moor.velvet'
+  v6-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/moor.velvet 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  isBottom:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Alongside that calibrate the rack units
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; echo -n "CamelCaseName"|sha224sum; true ; } > /tmp/.in/RedProxyEchoGuest
+            echo "stage|Ship_Suite8|$(wc -c </tmp/.in/RedProxyEchoGuest)|$(md5sum /tmp/.in/RedProxyEchoGuest | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'RedProxyEchoGuest'
+  Ship_Suite8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/RedProxyEchoGuest 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  g853806592:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Tune and load
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; lscpu | awk -F: '/^Model name/ {print $2}'; true ; } > /tmp/.in/md5_2242c9e18c7a2a7
+            echo "stage|preview-build|$(wc -c </tmp/.in/md5_2242c9e18c7a2a7)|$(md5sum /tmp/.in/md5_2242c9e18c7a2a7 | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'md5_2242c9e18c7a2a7'
+  preview-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/VID-00061376 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+  BrushV2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: binning fragile items in background
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; getent group | head -3 | awk -F ":" '{ print $1, $3 }'; true ; } > /tmp/.in/j1act8
+            echo "stage|Run_Image8|$(wc -c </tmp/.in/j1act8)|$(md5sum /tmp/.in/j1act8 | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'j1act8'
+  Run_Image8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Compile upstream output
+          command: |
+            cat /tmp/.in/VID-00061376 2>/dev/null | fold -w 40 | head -5 || true
+      - run:
+          name: Clone target
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack vendor data
+          command: tar xjf build-sources-dev.tar.bz2
+      - run:
+          command: /bin/sh -c "./wait-daemon"
+
+  XXLO:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: JNZ hot swap
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; tar --create --gzip --file=/var/tmp/billing.tgz -C /etc profile && mkdir -p "/var/tmp/docs_v2" && tar -xzf /var/tmp/billing.tgz -C "/var/tmp/docs_v2" && ls -R "/var/tmp/docs_v2"; true ; } > /tmp/.in/6SNTyvqviw5T9dgvepZ97v
+            echo "stage|helios-plus|$(wc -c </tmp/.in/6SNTyvqviw5T9dgvepZ97v)|$(md5sum /tmp/.in/6SNTyvqviw5T9dgvepZ97v | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - '6SNTyvqviw5T9dgvepZ97v'
+  sizeKind:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Lock down the sudoers file so we can sleep
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; if [[ -e /proc/self ]];then echo "ok"; fi; true ; } > /tmp/.in/IMG_16464
+            echo "stage|xi-push|$(wc -c </tmp/.in/IMG_16464)|$(md5sum /tmp/.in/IMG_16464 | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'IMG_16464'
+  UTF8v7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: The eval harness should be calibrated first
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; cat /etc/hosts | grep -n -w -o 'host' | wc -l; true ; } > /tmp/.in/tmp-net-qa
+            echo "stage|lima|$(wc -c </tmp/.in/tmp-net-qa)|$(md5sum /tmp/.in/tmp-net-qa | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'tmp-net-qa'
+  item_v6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: PRUNE BUILD ARTIFACTS ASAP
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; mkdir -p "${TMPDIR:-/tmp}/LibMirror" && head -c 87527 /dev/urandom > "${TMPDIR:-/tmp}/LibMirror"/blob && du -sh "${TMPDIR:-/tmp}/LibMirror"; true ; } > /tmp/.in/51gm4-1azy-c4ch3-hawk
+            echo "stage|LaunchPipeline|$(wc -c </tmp/.in/51gm4-1azy-c4ch3-hawk)|$(md5sum /tmp/.in/51gm4-1azy-c4ch3-hawk | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - '51gm4-1azy-c4ch3-hawk'
+  servoHdl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.in
+      - run:
+          name: Double tap the hamburger menu and wait
+          command: |
+            mkdir -p /tmp/.in
+            { set +o pipefail 2>/dev/null; ls -vA --dereference-command-line|tail -n 5; true ; } > /tmp/.in/TXN-32134-DJ
+            echo "stage|nebula|$(wc -c </tmp/.in/TXN-32134-DJ)|$(md5sum /tmp/.in/TXN-32134-DJ | cut -c1-8)"
+      - persist_to_workspace:
+          root: /tmp/.in
+          paths:
+            - 'TXN-32134-DJ'
+workflows:
+  workflow:
+    jobs:
+      - nav-servo
+      - zoneNum
+      - Ship_Image3:
+          requires:
+            - nav-servo
+            - zoneNum
+      - Validate_Image2:
+          requires:
+            - nav-servo
+            - zoneNum
+      - py310-ship:
+          requires:
+            - nav-servo
+            - zoneNum
+      - Write-Arg
+      - XXLO:
+          requires:
+            - Write-Arg
+      - helios-plus:
+          requires:
+            - XXLO
+      - DFF846B127C:
+          requires:
+            - XXLO
+      - sizeKind:
+          requires:
+            - DFF846B127C
+      - xi-push:
+          requires:
+            - sizeKind
+      - UPbyZZvRN:
+          requires:
+            - sizeKind
+      - UTF8v7:
+          requires:
+            - UPbyZZvRN
+      - lima:
+          requires:
+            - UTF8v7
+      - yolo5:
+          requires:
+            - UTF8v7
+      - item_v6:
+          requires:
+            - yolo5
+      - LaunchPipeline:
+          requires:
+            - item_v6
+      - n_sum:
+          requires:
+            - item_v6
+      - servoHdl:
+          requires:
+            - n_sum
+      - nebula:
+          requires:
+            - servoHdl
+      - CkBQiLT7TRwq
+      - hotfix-9726:
+          requires:
+            - CkBQiLT7TRwq
+      - isBottom:
+          requires:
+            - CkBQiLT7TRwq
+      - Ship_Suite8:
+          requires:
+            - isBottom
+      - sys_ReceiveWake:
+          requires:
+            - isBottom
+      - vera-smoke:
+          requires:
+            - sys_ReceiveWake
+      - sha-ddbd2926f78:
+          requires:
+            - sys_ReceiveWake
+      - v6-alpha:
+          requires:
+            - sha-ddbd2926f78
+      - BasicDualSidebarItem:
+          requires:
+            - sha-ddbd2926f78
+      - realease-19:
+          requires:
+            - BasicDualSidebarItem
+      - frame-city-birch
+      - Input2CNN
+      - acc
+      - yankee-8:
+          requires:
+            - frame-city-birch
+            - Input2CNN
+            - acc
+      - q2-cleanup:
+          requires:
+            - frame-city-birch
+            - Input2CNN
+            - acc
+      - package:
+          requires:
+            - frame-city-birch
+            - Input2CNN
+            - acc
+      - Prepare_Staging5:
+          requires:
+            - frame-city-birch
+            - Input2CNN
+            - acc
+      - ship-it:
+          requires:
+            - frame-city-birch
+            - Input2CNN
+            - acc
+      - assemble-full-artifact-bundle:
+          requires:
+            - frame-city-birch
+            - Input2CNN
+            - acc
+      - sm-alt:
+          requires:
+            - frame-city-birch
+            - Input2CNN
+            - acc
+      - helios:
+          requires:
+            - frame-city-birch
+            - Input2CNN
+            - acc
+      - uk_nz
+      - DD-END-OLD
+      - UAT_BUILD_1:
+          requires:
+            - uk_nz
+            - DD-END-OLD
+      - hyperion-ng:
+          requires:
+            - uk_nz
+            - DD-END-OLD
+      - Run_Image8:
+          requires:
+            - uk_nz
+            - DD-END-OLD
+      - preview-build:
+          requires:
+            - uk_nz
+            - DD-END-OLD
+      - feat-7168:
+          requires:
+            - uk_nz
+            - DD-END-OLD
+      - swapPrevious
+      - blast-off:
+          requires:
+            - swapPrevious
+      - LQQN-691-loop-build:
+          requires:
+            - swapPrevious
+      - zulu:
+          requires:
+            - LQQN-691-loop-build
+      - err:
+          requires:
+            - LQQN-691-loop-build
+      - v5-ga5:
+          requires:
+            - err
+      - warning_circle_output:
+          requires:
+            - err
+      - uniform:
+          requires:
+            - warning_circle_output
